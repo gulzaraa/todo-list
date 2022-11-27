@@ -57,6 +57,8 @@ color: var(--accent-color);
 border: 2px solid var(--accent-color);
 background-color: inherit;
 transition: all 0.2s;
+
+height: 45px;
 }
 .todo-btn:hover{
   color: var(--background);
@@ -78,7 +80,7 @@ justify-content: space-between;
 color: red;
 font-size: inherit;
 }
-.btn-x{
-  color: red;
-  
+.delete {
+  width: 40px;
+  height: 40px;
 }
