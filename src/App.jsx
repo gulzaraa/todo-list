@@ -7,8 +7,10 @@ function App() {
 	const [favorites, setFavorites] = useState([]);
 	const [inputValue, setInputValue] = useState('');
 	const [theme, setTheme] = useState('white');
+	const [isFirst, setFirst] = useState(true);
  useEffect(()=>{
 	const localTasks= localStorage.getItem('tasks')
+	const localFavs = localStorage.gitItem('fav-tasks');
 	if(localTasks){
 		const useTasks = JSON.parse(localTasks);
 	setTasks(useTasks);}
@@ -16,7 +18,28 @@ function App() {
 		const nTasks = JSON.stringify(tasks);
 		localStorage.setItem('tasks', nTasks);
 	}
+	if (localFavs){
+		const useFavs = JSON.parse(localFavs);
+		setFavorites(useFavs)
+	}
+	else{
+		const nFavs= JSON.stringify(favorites);
+		localStorage.setItem('fav-tasks', nFavs)
+	}
+	setFirst(false)
 }, []);
+useEffect(() =>{
+	if(isFirst===false){
+		const nTasks=JSON.stringify([...tasks]);
+		localStorage.setItem('tasks',nTasks);
+	}
+}, [tasks]);
+useEffect(() =>{
+	if(isFirst===false){
+		const nFavs =JSON.stringify([...favorites]);
+		localStorage.setItem('fav-tasks',nFavs);
+	}
+}, [favorites]);
 	
 	const handleAddToFavorite = (event, taskIndex, listType) => {
 		if (listType === 'task-list' && event.target.checked) {
@@ -26,7 +49,9 @@ function App() {
 				} else {
 					return item;
 				}
-				const filteredArray = tasks.filter((item, index) => { return index !== taskIndex});
+				const filteredArray = tasks.filter((item, index) => {
+					 return index !== taskIndex 
+					});
 				setTasks(filteredArray)
 			});
 						setTasks(filteredArr);
@@ -141,7 +166,7 @@ return(
 									handleAddToFavorite(event, index, 'task-list')
 								}
 							/>
-							<button  className='btn-x' onClick={()=>deleteTask(index)} />X 
+							<button  className='btn-x' onClick={()=>deleteTask(index)} >X</button>
 							 </div>
 						</li>
 					);
