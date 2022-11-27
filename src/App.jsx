@@ -15,34 +15,34 @@ function App() {
 		const localFavs = localStorage.getItem('fav-tasks');
 
 		if (localTasks) {
-			const parsedTasks = JSON.parse(localTasks);
-			setTasks(parsedTasks);
+			const useTasks = JSON.parse(localTasks);
+			setTasks(useTasks);
 		} else {
-			const stringedTasks = JSON.stringify(tasks);
-			localStorage.setItem('tasks', stringedTasks);
+			const nTasks = JSON.stringify(tasks);
+			localStorage.setItem('tasks', nTasks);
 		}
 
 		if (localFavs) {
-			const parsedFavs = JSON.parse(localFavs);
-			setFavorites(parsedFavs);
+			const useFavs = JSON.parse(localFavs);
+			setFavorites(useFavs);
 		} else {
-			const stringedFavs = JSON.stringify(favorites);
-			localStorage.setItem('fav-tasks', stringedFavs);
+			const nFavs = JSON.stringify(favorites);
+			localStorage.setItem('fav-tasks', nFavs);
 		}
 		setFirst(false)
 	}, []);
 
 	useEffect(() => {
 		if (isFirst===false) {
-			const stringedTasks = JSON.stringify([...tasks]);
-			localStorage.setItem('tasks', stringedTasks);
+			const nTasks = JSON.stringify([...tasks]);
+			localStorage.setItem('tasks', nTasks);
 		}
 		}, [tasks]);
 
 	useEffect(() => {
 		if (isFirst===false) {	
-			const stringedFavs = JSON.stringify([...favorites]);
-			localStorage.setItem('fav-tasks', stringedFavs);
+			const nFavs = JSON.stringify([...favorites]);
+			localStorage.setItem('fav-tasks', nFavs);
 		}
 	}, [favorites]);
 
@@ -117,7 +117,7 @@ function App() {
 	}
 
 
-	const handleDelete = (taskIndex) => {
+	const deleteTask = (taskIndex) => {
 		const filteredArray = tasks.filter((item, index) => {
 			return index !== taskIndex;
 		});
@@ -125,7 +125,7 @@ function App() {
 		setTasks(filteredArray);
 	}
 
-	const handleDeleteFav = (taskIndex) => {
+	const deleteFav = (taskIndex) => {
 		const filteredFav = favorites.filter((item, index) => {
 			return index !== taskIndex;
 		});
@@ -154,7 +154,7 @@ function App() {
 										handleAddToFavorite(event, index, 'fav-list')
 									}
 								/>
-									<img src='./krest.jpg' className='delete' onClick={() => handleDeleteFav(index)} />
+									<img src='./krest.jpg' className='delete' onClick={() => deleteFav(index)} />
 								</div>
 							</li>
 						);
@@ -169,7 +169,7 @@ function App() {
 										handleAddToFavorite(event, index, 'task-list')
 									}
 								/>
-									<img src='./krest.jpg' className='delete' onClick={() => handleDelete(index)} />
+									<img src='./krest.jpg' className='delete' onClick={() => deleteTask(index)} />
 								</div></li>
 						);
 					})}

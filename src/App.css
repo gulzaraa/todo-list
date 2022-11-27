@@ -53,12 +53,17 @@ font-size: 1.5rem;
 .todo-btn{
 padding: 0 20px;
 font-size: inherit;
-color: var(--accent-color);
+color: var(--accent-color); 
 border: 2px solid var(--accent-color);
 background-color: inherit;
 transition: all 0.2s;
 
 height: 45px;
+}
+.actions{
+  height: 50px;
+  width: 50px;
+  display: flex;
 }
 .todo-btn:hover{
   color: var(--background);
@@ -83,4 +88,5 @@ font-size: inherit;
 .delete {
   width: 40px;
   height: 40px;
+  display: flex;
 }
